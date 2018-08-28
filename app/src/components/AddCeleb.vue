@@ -1,7 +1,8 @@
 <template id="celebrity-template">
   <section class="add-celeb">
-    <h1>New Celeb</h1>
+    <h3>New Celeb</h3>
     <form @submit.prevent="handleSubmit">
+      <p>*optional</p>
       <label>
         Name:
         <input type="text" name="name" placeholder="Name" required
@@ -21,8 +22,8 @@
       </label>
 
       <label>
-        Are They A Tool?
-        <input type="text" name="founded" placeholder="True/False" required
+        <sup>*</sup>Are They A Tool?
+        <input type="checkbox" required
           v-model="celeb.tool">
       </label>
 
@@ -31,7 +32,6 @@
         <textarea name="body" rows="8" cols="40" required 
           v-model="celeb.description"></textarea>
       </label>
-      
       <label>
         <button type="submit">Add</button>
       </label>
