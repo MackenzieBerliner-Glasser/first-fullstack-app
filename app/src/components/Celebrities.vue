@@ -2,7 +2,11 @@
   <section>
     <h1>Celebs</h1>
     <ul>
-      <Celeb />
+      <Celeb
+        v-for="(celeb, index) in celebrities"
+        :key="index"
+        :celeb="celeb"
+      />
     </ul>
   </section>
 </template>
