@@ -8,12 +8,14 @@
         :celeb="celeb"
       />
     </ul>
+    <AddCeleb :on-add="handleAdd"/>
   </section>
 </template>
 
 <script>
 import api from '../services/api.js';
 import Celeb from './Celeb.vue';
+import AddCeleb from './AddCeleb.vue';
 export default {
   data() {
     return {
@@ -28,7 +30,16 @@ export default {
     
   },
   components: {
-    Celeb
+    Celeb,
+    AddCeleb
+  },
+  methods: {
+    handleAdd(celeb) {
+      return api.addCeleb(celeb)
+        .then(saved => {
+          this.celebrities.push(saved);
+        });
+    }
   }
 };
 </script>
