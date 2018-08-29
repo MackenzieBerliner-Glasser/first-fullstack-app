@@ -30,7 +30,23 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+  color: #87744A;
+}
+header {
+  height: 200px;
+  background-color: #F7F5CD;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+header img {
+  width: 300px;
+}
+nav a {
+  text-decoration: none;
+  color: #87744A;
+  margin: 5px;
+  padding: 5px;
+  border: 1px solid black;
 }
 </style>
