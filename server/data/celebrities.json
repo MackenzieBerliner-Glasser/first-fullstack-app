@@ -1,1 +1,51 @@
-[{"name":"Leonardo Wilhelm DiCaprio","gender":"Male","age":43,"tool":false,"description":"I am the best actor."},{"name":"Scarlett Ingrid Johansson","gender":"Female","age":33,"tool":false,"description":"I am the best actor."},{"name":"Ryan Rodney Reynolds","gender":"Male","age":41,"tool":false,"description":"I am the best actor."},{"name":"Justin Drew Bieber","gender":"Male","age":24,"tool":true,"description":"I am the worst singer ever."},{"name":"Kimberly Noel Kardashian","gender":"Female","age":37,"tool":true,"description":"I am the worst human ever."},{"name":"Beyoncé Giselle Knowles-Carter","gender":"Female","age":36,"tool":false,"description":"YAAASSS"},{"name":"Christopher Catesby Harington","gender":"Male","age":"31","tool":false,"description":"KING OF THE NORTH"}]
+[
+    {
+        "name": "Leonardo Wilhelm DiCaprio",
+        "gender": "Male",
+        "age": 43,
+        "tool": false,
+        "description": "I am the best actor."
+    },
+    {
+        "name": "Scarlett Ingrid Johansson",
+        "gender": "Female",
+        "age": 33,
+        "tool": false,
+        "description": "I am the best actor."
+    },
+    {
+        "name": "Ryan Rodney Reynolds",
+        "gender": "Male",
+        "age": 41,
+        "tool": false,
+        "description": "I am the best actor."
+    },
+    {
+        "name": "Justin Drew Bieber",
+        "gender": "Male",
+        "age": 24,
+        "tool": true,
+        "description": "I am the worst singer ever."
+    },
+    {
+        "name": "Kimberly Noel Kardashian",
+        "gender": "Female",
+        "age": 37,
+        "tool": true,
+        "description": "I am the worst human ever."
+    },
+    {
+        "name": "Beyoncé Giselle Knowles-Carter",
+        "gender": "Female",
+        "age": 36,
+        "tool": false,
+        "description": "YAAASSS"
+    },
+    {
+        "name": "Christopher Catesby Harington",
+        "gender": "Male",
+        "age": "31",
+        "tool": false,
+        "description": "KING OF THE NORTH"
+    }
+]
