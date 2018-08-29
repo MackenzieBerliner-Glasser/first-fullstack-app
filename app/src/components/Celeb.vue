@@ -1,10 +1,10 @@
 <template id="celebrity-template">
-    <article class="celeb">
-        <router-link :to="`/celebrities/${celeb.id}`">
-        <h3>{{ celeb.name }}</h3>
-        <p>{{ celeb.description }}</p>
-        </router-link>
-    </article>
+  <article class="celeb">
+    <router-link class="celeb-link" :to="`/celebrities/${celeb.id}`">
+      <h3>{{ celeb.name }}</h3>
+      <p>{{ celeb.description }}</p>
+    </router-link>
+  </article>
 </template>
 
 <script>
@@ -16,6 +16,10 @@ export default {
 
 <style scoped>
 .celeb {
-    border: 1px solid black;
+  border: 1px solid black;
+}
+.celeb-link {
+  text-decoration: none;
+  color: #87744A;
 }
 </style>
