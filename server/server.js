@@ -1,41 +1,78 @@
-
+// basic express app
 const express = require('express');
-
 const app = express();
 
+// logging
 const morgan = require('morgan');
 app.use(morgan('dev'));
 
+// middleware (cors and read json body)
 const cors = require('cors');
-
 app.use(cors());
-
 app.use(express.json());
 
-const fs = require('fs');
+// connect to the database
+const pg = require('pg');
+const Client = pg.Client;
+const databaseUrl = 'postgres://localhost:5432/famous_people';
+const client = new Client(databaseUrl);
+client.connect();
 
-const dataPath = 'data/celebrities.json';
-
-function readData() {
-  const raw = fs.readFileSync(dataPath);
-  const data = JSON.parse(raw);
-
-  return data;
-}
-
+// routes
 app.get('/api/celebrities', (req, res) => {
-  const data = readData();
-  res.send(data);
+  client.query(`
+    SELECT 
+      id,
+      name, 
+      gender,
+      age,
+      tool,
+      description
+    FROM celebrities;
+  `)
+    .then(result => {
+      res.send(result.rows);
+    })
+    .catch(err => console.log(err));
+});
+
+app.get('/api/celebrities/:id', (req, res) => {
+  client.query(`
+    SELECT 
+      id,
+      name, 
+      gender,
+      age,
+      tool,
+      description
+    FROM celebrities
+    WHERE id = $1;
+  `,
+  [req.params.id]
+  )
+    .then(result => {
+      res.send(result.rows[0]);
+    })
+    .catch(err => console.log(err));
+  
 });
 
 app.post('/api/celebrities', (req, res) => {
-  const data = readData();
-  data.push(req.body);
-  fs.writeFileSync(dataPath, JSON.stringify(data));
+  console.log('posting');
+  const body = req.body;
 
-  res.send(req.body);
+  client.query(`
+    INSERT INTO celebrities (name, gender, age, tool, description)
+    VALUES ($1, $2, $3, $4, $5)
+    RETURNING *;
+  `,
+  [body.name, body.gender, body.age, body.tool, body.description]
+  )
+    .then(result => {
+      res.send(result.rows[0]);
+    })
+    .catch(err => console.log(err));
 });
 
-const PORT = 3000;
 
-app.listen(PORT, () => console.log('app running...'));
+app.listen(3000, () => console.log('app running...'));
