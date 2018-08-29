@@ -3,8 +3,8 @@
     <h1>Celebs</h1>
     <ul>
       <Celeb
-        v-for="(celeb, index) in celebrities"
-        :key="index"
+        v-for="(celeb, id) in celebrities"
+        :key="id"
         :celeb="celeb"
       />
     </ul>

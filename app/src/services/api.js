@@ -12,7 +12,11 @@ export default {
       body: JSON.stringify(celeb)
     })
       .then(response => response.json());
+  },
+  getCelebById(id) {
+    return fetch(`http://localhost:3000/api/celebrities/${id}`, {
+      headers: { 'Content-Type': 'application/json' }
+    })
+      .then(response => response.json());
   }
-
-
 };
