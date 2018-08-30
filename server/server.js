@@ -12,23 +12,20 @@ app.use(cors());
 app.use(express.json());
 
 // connect to the database
-const pg = require('pg');
-const Client = pg.Client;
-const databaseUrl = 'postgres://localhost:5432/famous_people';
-const client = new Client(databaseUrl);
-client.connect();
+const client = require('./db-client');
 
 // routes
 app.get('/api/celebrities', (req, res) => {
   client.query(`
     SELECT 
-      id,
-      name, 
-      gender,
-      age,
-      tool,
-      description
-    FROM celebrities;
+      c.id,
+      c.name, 
+      f.id as "fameId",
+      f.name as occupation
+      FROM celebrities as c
+      JOIN famous as f
+      ON c.fame_id = f.id
+      ORDER BY c.name
   `)
     .then(result => {
       res.send(result.rows);
