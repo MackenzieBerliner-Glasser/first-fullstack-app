@@ -10,10 +10,11 @@ client.connect()
   .then(() => {
     return client.query(`
      DROP TABLE IF EXISTS celebrities;
+     DROP TABLE IF EXISTS famous;
     `);
   })
   .then(
-    () => console.log('delete tables complete'),
+    () => console.log('drop tables complete'),
     err => console.log(err)
   )
   .then(() => {

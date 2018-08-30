@@ -7,10 +7,13 @@
     "create-tables": "node scripts/create-tables.js",
     "drop-tables": "node scripts/drop-tables.js",
     "recreate-tables": "npm run drop-tables && npm run create-tables",
-    "lint": "eslint .",
-    "pretest": "npm run lint",
-    "test": "exit 0",
-    "start": "nodemon server.js"
+    "seed-quadrants": "node scripts/seed-quadrants.js",
+    "seed-neighborhoods": "node scripts/seed-neighborhoods.js",
+    "seed-data": "npm run seed-quadrants && npm run seed-neighborhoods",
+    "db-load-all": "npm run recreate-tables && npm run seed-data",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start:watch": "nodemon server.js",
+    "start": "node server.js"
   },
   "author": "",
   "license": "ISC",
