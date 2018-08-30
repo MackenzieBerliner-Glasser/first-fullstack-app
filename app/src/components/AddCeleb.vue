@@ -23,7 +23,7 @@
 
       <label>
         <sup>*</sup>Are They A Tool?
-        <input type="checkbox" required
+        <input type="checkbox" 
           v-model="celeb.tool">
       </label>
 
