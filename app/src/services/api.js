@@ -9,7 +9,7 @@ export default {
     })
       .then(response => response.json());
   },
-  getCelebById(id) {
+  getCeleb(id) {
     return fetch(`${CELEBRITIES_URL}/${id}`, {
       headers: { 'Content-Type': 'application/json' }
     })

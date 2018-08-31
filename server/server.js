@@ -37,7 +37,8 @@ app.get('/api/celebrities/:id', (req, res) => {
   client.query(`
     SELECT 
       id,
-      name, 
+      name,
+      fame_id as "fameId", 
       gender,
       age,
       tool,
@@ -59,11 +60,11 @@ app.post('/api/celebrities', (req, res) => {
   const body = req.body;
 
   client.query(`
-    INSERT INTO celebrities (name, gender, age, tool, description)
-    VALUES ($1, $2, $3, $4, $5)
+    INSERT INTO celebrities (name, fame_id, gender, age, tool, description)
+    VALUES ($1, $2, $3, $4, $5, $6)
     RETURNING *;
   `,
-  [body.name, body.gender, body.age, body.tool, body.description]
+  [body.name, body.fameId, body.gender, body.age, body.tool, body.description]
   )
     .then(result => {
       res.send(result.rows[0]);

@@ -1,25 +1,89 @@
-<template id="celebrity-template">
-  <article class="celeb">
-    <router-link class="celeb-link" :to="`/celebrities/${celeb.id}`">
+<template id="celeb-template">
+  <div v-if="celeb">
+    <article v-if="!editing">
       <h3>{{ celeb.name }}</h3>
+      <p>Gender:{{ celeb.gender }}</p>
+      <p>Age:{{ celeb.age }}</p>
+      <p v-if="celeb.tool === true"
+      :class="{ tool: celeb.tool === true }">
+      <strong>TOOL ALERT!!</strong>
+      </p>
       <p>{{ celeb.description }}</p>
-    </router-link>
-  </article>
+      <p>
+        <button @click="handleRemove">remove this neighborhood</button>
+      </p>
+    </article>
+    <NeighborhoodForm 
+      v-else 
+      label="Update"
+      :celeb="celeb"
+      :famous="famous"
+      :onEdit="handleUpdate"
+    />
+    <button @click="editing = !editing">{{ editing ? 'Cancel' : '✏️' }}</button>
+  </div>
 </template>
 
 <script>
-export default {
-  props: ['celeb']
+import CelebForm from './CelebForm';
+import api from '../services/api';
 
+export default {
+  props: {
+    famous: Array
+  },
+  data() {
+    return {
+      celeb: null,
+      editing: false
+    };
+  },
+  components: {
+    CelebForm
+  },
+  created() {
+    api.getCeleb(this.$route.params.id)
+      .then(celeb => {
+        this.celeb = celeb;
+      });
+  },
+  computed: {
+    fame() {
+      if(!this.celeb || !this.famous) {
+        return null;
+      }
+
+      const { fameId } = this.celeb;
+      return this.famous.find(f => f.id === fameId);
+    },
+  },
+  methods: {
+    handleRemove() {
+      if(!confirm(`Are you sure you want to remove ${this.celeb.name}?`)) {
+        return;
+      }
+
+      return api.removeNeighborhood(this.celeb.id)
+        .then(() => {
+          this.$router.push('/celebrities');
+        });
+    },
+    handleUpdate(toUpdate) {
+      return api.updateCeleb(toUpdate)
+        .then(updated => {
+          this.celeb = updated;
+          this.editing = false;
+        });
+    }
+  }
 };
+
 </script>
 
 <style scoped>
-.celeb {
-  border: 1px solid black;
+
+h3 {
+  margin: 40px 0 0;
 }
-.celeb-link {
-  text-decoration: none;
-  color: #87744A;
-}
+
 </style>

@@ -1,89 +1,36 @@
-<template id="celebrity-template">
-  <section class="add-celeb">
-    <h3>New Celeb</h3>
-    <form @submit.prevent="handleSubmit">
-      <p>*optional</p>
-      <label>
-        Name:
-        <input type="text" name="name" placeholder="Name" required
-          v-model="celeb.name">
-      </label>
-
-      <label>
-        Gender:
-        <input type="text" name="gender" placeholder="Gender" required
-          v-model="celeb.gender">
-      </label>
-
-      <label>
-        Age:
-        <input type="text" name="age" placeholder="Age" required
-          v-model="celeb.age">
-      </label>
-
-      <label>
-        <sup>*</sup>Are They A Tool?
-        <input type="checkbox" 
-          v-model="celeb.tool">
-      </label>
-
-      <label>
-        Description:
-        <textarea name="body" rows="8" cols="40" required 
-          v-model="celeb.description"></textarea>
-      </label>
-      <label>
-        <button type="submit">Add</button>
-      </label>
-    </form>
-  </section>
+<template>
+    <section>
+        <h2>Add A Celeb</h2>
+        <CelebForm
+            label="Add"
+            :famous="famous"
+            :onEdit="handleAdd"
+        />
+    </section>
 </template>
 
 <script>
-
-const initCeleb = () => {
-  return {
-    name: '',
-    gender: '',
-    age: '',
-    tool: '',
-    description: ''
-  };
-};
-
+import CelebForm from './CelebForm.vue';
+import api from '../services/api';
 export default {
-  props: {
-    onAdd: {
-      type: Function,
-      required: true
-    }
+  components: {
+    CelebForm
   },
-  data() {
-    return {
-      celeb: initCeleb()
-    };
+  props: {
+    famous: Array
   },
   methods: {
-    handleSubmit() {
-      this.onAdd(this.celeb)
-        .then(() => {
-          this.celeb = initCeleb();
+    handleAdd(celeb) {
+      return api.addCeleb(celeb)
+        .then(added => {
+          this.$router.push(`/neighborhoods/${added.id}`);
         });
     }
   }
-};
 
+};
 </script>
 
 <style>
 
-.add-celeb {
-  width: 300px;
-  text-align: left;
-  margin: auto;
-}
-
-label {
-  display: block;
-}
 </style>
