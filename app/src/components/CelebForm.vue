@@ -12,6 +12,13 @@
         Occupation:
         <select v-model.number="edit.fameId" required>
           <option disabled value=""> Please select a occupation </option>
+          <option
+          v-for="fame in famous"
+          :key="fame.id"
+          :value="fame.id"
+          >
+            {{fame.name}}
+          </option>
         </select>
       </label>
 
@@ -46,10 +53,11 @@
 </template>
 
 <script>
-
+import api from '../services/api';
 const initCeleb = () => {
   return {
     name: '',
+    fameId: '',
     gender: '',
     age: '',
     tool: '',
@@ -60,7 +68,6 @@ const initCeleb = () => {
 export default {
   props: {
     celeb: Object,
-    famous: Array,
     onEdit: {
       type: Function,
       required: true
@@ -68,6 +75,7 @@ export default {
   },
   data() {
     return {
+      famous: null,
       edit: this.celeb ? Object.assign({}, this.celeb) : initCeleb()
     };
   },
@@ -76,11 +84,19 @@ export default {
       return !!this.celeb;
     }
   },
+  created() {
+    api.getFamous()
+      .then(famous => {
+        this.famous = famous;
+        console.log(famous);
+      });
+  },
   methods: {
     handleSubmit() {
       this.onEdit(this.edit)
         .then(() => {
           this.edit = initCeleb();
+          console.log(this.edit);
         });
     }
   }

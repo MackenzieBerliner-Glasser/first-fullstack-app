@@ -10,7 +10,7 @@
       </p>
       <p>{{ celeb.description }}</p>
       <p>
-        <button @click="handleRemove">remove this neighborhood</button>
+        <button @click="handleRemove">remove this celeb</button>
       </p>
     </article>
     <NeighborhoodForm 
@@ -20,7 +20,7 @@
       :famous="famous"
       :onEdit="handleUpdate"
     />
-    <button @click="editing = !editing">{{ editing ? 'Cancel' : '✏️' }}</button>
+    <button @click="editing = !editing">{{ editing ? 'Cancel' : 'edit' }}</button>
   </div>
 </template>
 
@@ -63,7 +63,7 @@ export default {
         return;
       }
 
-      return api.removeNeighborhood(this.celeb.id)
+      return api.removeCeleb(this.celeb.id)
         .then(() => {
           this.$router.push('/celebrities');
         });

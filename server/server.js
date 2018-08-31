@@ -72,5 +72,45 @@ app.post('/api/celebrities', (req, res) => {
     .catch(err => console.log(err));
 });
 
+app.put('/api/celebrities/:id', (req, res) => {
+  const body = req.body;
+
+  client.query(`
+    update celebrities
+    set
+      name = $1,
+      fame_id = $2,
+      gender = $3,
+      age = $4,
+      tool = $5,
+      description = $6,
+    where id = $7
+    returning *;
+  `,
+  [body.name, body.fameId, body.gender, body.age, body.tool, body.description, req.params.id]
+  ).then(result => {
+    res.send(result.rows[0]);
+  });
+});
+
+app.delete('/api/celebrities/:id', (req, res) => {
+  client.query(`
+    delete from celebrities where id=$1;
+  `,
+  [req.params.id]
+  ).then(() => {
+    res.send({ removed: true });
+  });
+});
+
+app.get('/api/famous', (req, res) => {
+  client.query(`
+    SELECT *
+    FROM famous;
+  `)
+    .then(result => {
+      res.send(result.rows);
+    });
+});
 
 app.listen(3000, () => console.log('app running...'));
