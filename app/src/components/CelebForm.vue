@@ -49,6 +49,7 @@
         <button type="submit">Add</button>
       </label>
     </form>
+    {{ edit }}
   </section>
 </template>
 

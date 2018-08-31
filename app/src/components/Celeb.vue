@@ -10,7 +10,7 @@
       </p>
       <p>{{ celeb.description }}</p>
       <p>
-        <button @click="handleRemove">remove this celeb</button>
+        <button @click="handleRemove">Remove This Celeb</button>
       </p>
     </article>
     <NeighborhoodForm 
@@ -84,6 +84,10 @@ export default {
 
 h3 {
   margin: 40px 0 0;
+}
+
+.tool {
+  color: red;
 }
 
 </style>
