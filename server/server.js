@@ -83,7 +83,7 @@ app.put('/api/celebrities/:id', (req, res) => {
       gender = $3,
       age = $4,
       tool = $5,
-      description = $6,
+      description = $6
     where id = $7
     returning *;
   `,

@@ -13,7 +13,7 @@
         <button @click="handleRemove">Remove This Celeb</button>
       </p>
     </article>
-    <NeighborhoodForm 
+    <CelebForm 
       v-else 
       label="Update"
       :celeb="celeb"
